@@ -6,14 +6,16 @@ require 'json'
 
 # Identification sur le web_service en tant que société
 begin
-  response = RestClient.post("https://ws.agiloffice.fr/demo/session_firm_login?password=xxxxxx", {:accept => 'application/json'})
+  response = RestClient.post("https://ws.agiloffice.fr/demo/session_firm_login?password=xxxxxx", 
+    {:accept => 'application/json'})
   if response.code == 200
     puts "Ok : identification effectuée"
     cookie_str = response.headers[:set_cookie].first.split(';').first
 
     # Décrochage du poste 8003
     begin
-      response = RestClient.post("https://ws.agiloffice.fr/demo/phone_answer?phone=8003", {}, {:accept => 'application/json', :cookie => cookie_str})
+      response = RestClient.post("https://ws.agiloffice.fr/demo/phone_answer?phone=8003", 
+        {}, {:accept => 'application/json', :cookie => cookie_str})
       if response.code == 200
         puts "Ok : décrochage du poste effectué : #{response.body}"
       else
@@ -29,7 +31,8 @@ begin
 
     # Raccrochage du poste 8003
     begin
-      response = RestClient.post("https://ws.agiloffice.fr/demo/phone_hangup?phone=8003", {}, {:accept => 'application/json', :cookie => cookie_str})
+      response = RestClient.post("https://ws.agiloffice.fr/demo/phone_hangup?phone=8003", 
+        {}, {:accept => 'application/json', :cookie => cookie_str})
       if response.code == 200
         puts "Ok : raccrochage du poste effectué : #{response.body}"
       else
@@ -48,7 +51,8 @@ begin
 
   # Récupération de l'url du serveur de push
   begin
-    response = RestClient.get("https://ws.agiloffice.fr/demo/push_server_url", {:accept => 'application/json', :cookie => cookie_str})
+    response = RestClient.get("https://ws.agiloffice.fr/demo/push_server_url", 
+      {:accept => 'application/json', :cookie => cookie_str})
     if response.code == 200
       puts "Ok : url du push_server récupérée : #{response.body}"
     else
@@ -72,7 +76,8 @@ begin
       fax_id = JSON.parse(response.body)['fax_id']
       # Récupération de l'état du fax envoyé
       begin
-        response = RestClient.get("https://ws.agiloffice.fr/demo/get_fax_status?fax_id=#{fax_id}", {:accept => 'application/json', :cookie => cookie_str})
+        response = RestClient.get("https://ws.agiloffice.fr/demo/get_fax_status?fax_id=#{fax_id}", 
+          {:accept => 'application/json', :cookie => cookie_str})
         if response.code == 200
           puts "Ok : statut du fax récupéré : #{response.body}"
         else
