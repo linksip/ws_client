@@ -1,7 +1,5 @@
-# Simple client ruby pour le web service AgilOffice
+# Clients pour le web service AgilOffice
 
-Un client tout simple pour accéder au web service AgilOffice
+Le client exemple en ruby est le script ws_client.rb
 
-## Exemple
-
-L'exemple d'utilisation est le script ws_client.rb
+Le client exemple en python est le script ws_client.py
